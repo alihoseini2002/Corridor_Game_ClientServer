@@ -3,6 +3,20 @@
 #include <game.h>
 using namespace std;
 using namespace httplib;
+bool aval(int f=0)
+{
+    static bool a=false;
+    if(f==1){a=true;}
+    return a;
+}
+
+int pl(int a)
+{
+    static int c=0;
+    c+=a;
+    return c;
+}
+
 int addi(int a)
 {
     static int i=0;
@@ -42,8 +56,8 @@ int turn(int a,int b)
 string gaming(int a,string jahat="")
 {
     string f="";
-    int nobat=turn(0,add(0));
-    static Map game(add(0));
+    int nobat=turn(0,pl(0));
+    static Map game(pl(0));
     if(a==1){f=game.whereismohre(nobat);}
     else if(a==2){f=game.move(nobat,jahat);}
     else if(a==3){f=game.placewall(addi(0),addj(0),jahat);}
@@ -55,25 +69,34 @@ string gaming(int a,string jahat="")
 int main()
 {
     Server svr;
+
+    svr.Get("/ghablaval",[](const Request &req, Response &res){
+        if(aval()){res.set_content("dont","text/plain");}
+        else{res.set_content("ask","text/plain");}
+    });
+
+    svr.Get("/pl",[](const Request &req, Response &res){
+        pl(addj(0));
+        aval(1);
+    });
+
     svr.Get("/start", [](const Request &req, Response &res) {
         int player=add(1);
-        if(player==1)
+        if(player<pl(0))
         {
-            string s="please wait for 1 or 3 other players";
+            char l=(pl(0)-player)+48;
+            string s="please wait for ";
+            s+=l;
+            s+=" other players";
             res.set_content(s, "text/plain");
         }
-        else if(player==3)
-        {
-            string s="please wait for 1 other player";
-            res.set_content(s, "text/plain");
-        }
-        else if(player==4 || player==2){res.set_content("The game begins :)", "text/plain");}
+        else if(player==pl(0)){res.set_content("The game begins :)", "text/plain");}
         else{res.set_content("sorry you can't play :(", "text/plain");}
     });
 
     svr.Get("/wait", [](const Request &req, Response &res) {
         int player=add(0);
-        if(player==4 || player==2)
+        if(player==pl(0))
         {
             string s="The game begins :) and you are player ";
             char r=(numplayer())+48;
@@ -84,7 +107,7 @@ int main()
     });
 
     svr.Get("/turn", [](const Request &req, Response &res) {
-        char nobat=turn(0,add(0))+48;
+        char nobat=turn(0,pl(0))+48;
         string s="it's player ";
         s+=nobat;
         s+=" turn.";
@@ -137,7 +160,7 @@ int main()
     });
    
     svr.Get("/done", [](const Request &req, Response &res) {
-        turn(1,add(0));
+        turn(1,pl(0));
         res.set_content("next round", "text/plain");
     });
 
