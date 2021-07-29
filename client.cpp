@@ -124,6 +124,10 @@ int main()
                 cout<<map;
                 continue;
             }
+            else
+            {
+                cout<<"wrong number. choose again :)\n";
+            }
         }
     }
 }
