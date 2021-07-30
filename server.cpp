@@ -3,6 +3,13 @@
 #include <game.h>
 using namespace std;
 using namespace httplib;
+bool barande(int f=0)
+{
+    static bool a=false;
+    if(f==1){a=true;}
+    return a;
+}
+
 bool aval(int f=0)
 {
     static bool a=false;
@@ -156,6 +163,7 @@ int main()
    
     svr.Get("/5", [](const Request &req, Response &res) {
         string f=gaming(5);
+        if(f.substr(0,2)=="tr"){barande(1);}
         res.set_content(f, "text/plain");
     });
    
@@ -178,6 +186,15 @@ int main()
 
     svr.Get("/-j", [](const Request &req, Response &res) {
         addj(-1);
+    });
+
+    svr.Get("/barande", [&](const Request& req, Response& res) {
+        if(barande()){res.set_content("lose","text/plain");}
+        else{res.set_content("continue","text/plain");}
+    });
+
+    svr.Get("/stop", [&](const Request& req, Response& res) {
+        svr.stop();
     });
 
     svr.listen("localhost",8080);

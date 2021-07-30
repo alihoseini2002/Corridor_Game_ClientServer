@@ -94,6 +94,8 @@ int main()
                         {
                             win=false;
                             cout<<bb.substr(3,(bb.length()-3))<<"congratulations!!!!\n";
+                            cli.Get("/stop");
+                            break;
                         }
                         auto done=cli.Get("/done");
                         cout<<done->body<<endl;
@@ -109,20 +111,20 @@ int main()
             {
                 int i,j;
                 string jahat,cc="";
-                cout<<"where do you want place the wall?\nradif to placewall or -1 to return to menu:";
+                cout<<"where do you want place the wall?\nenter radif to placewall or -1 to return to menu:";
                 cin>>i;
                 if(i==-1){continue;}
                 while((i<0) || (i>10))
                 {
-                    cout<<"radif should be equal or greater than 0 and smaller than 11. try again\nradif:";
+                    cout<<"enter radif should be equal or greater than 0 and smaller than 11. try again\nradif:";
                     cin>>i;
                 }
-                cout<<"soton to placewall or -1 to return to menu:";
+                cout<<"enter soton to placewall or -1 to return to menu:";
                 cin>>j;
                 if(j==-1){continue;}
                 while((j<0) || (j>10))
                 {
-                    cout<<"soton should be equal or greater than 0 and smaller than 11. try again\nsoton:";
+                    cout<<"enter soton should be equal or greater than 0 and smaller than 11. try again\nsoton:";
                     cin>>j;
                 }
                 cout<<"Horizontal(H) or Vertical(V) to place wall or Sorry(S) to return to menu:";
@@ -174,6 +176,17 @@ int main()
             else
             {
                 cout<<"wrong number. choose again :)\n";
+            }
+        }
+        else
+        {
+            auto llose=cli.Get("/barande");
+            string lose=llose->body;
+            if(lose=="lose")
+            {
+                cout<<"sorry you lost the game :(";
+                cli.Get("/stop");
+                break;
             }
         }
     }
