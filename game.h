@@ -105,9 +105,9 @@ string Map::move(int i,string jahat)
     {
         if(jahat=="up")
         {
-            if(((mohre[i-1][0])-1)>=0)
+            if(((mohre[i-1][0])-1)>=0)//can go up
             {
-                if(m[(mohre[i-1][0])-1][mohre[i-1][1]]==0)
+                if(m[(mohre[i-1][0])-1][mohre[i-1][1]]==0)//the upper place is empty or no??
                 {
                     m[mohre[i-1][0]][mohre[i-1][1]]=0;
                     m[(mohre[i-1][0])-1][mohre[i-1][1]]=i;
