@@ -19,7 +19,7 @@ int main()
         cin>>pl;
         while((pl!=2) && (pl!=4))
         {
-            cout<<"pl should be equal to 2 or 4.try again: ";
+            cout<<"players should be equal to 2 or 4.try again: ";
             cin>>pl;
         }
         for(int i=0;i<pl;i++){cli.Get("/j");}
@@ -184,7 +184,7 @@ int main()
             string lose=llose->body;
             if(lose=="lose")
             {
-                cout<<"sorry you lost the game :(";
+                cout<<"sorry you lost the game :(\n";
                 cli.Get("/stop");
                 break;
             }

@@ -147,7 +147,7 @@ string Map::move(int i,string jahat)
             }
             else
             {
-                cout<<"fa sorry you can't go down";
+                s="fa sorry you can't go down";
                 return s;
             }
         }

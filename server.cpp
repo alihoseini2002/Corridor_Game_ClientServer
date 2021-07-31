@@ -3,6 +3,7 @@
 #include <game.h>
 using namespace std;
 using namespace httplib;
+
 bool barande(int f=0)
 {
     static bool a=false;
