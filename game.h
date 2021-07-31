@@ -206,8 +206,17 @@ string Map::move(int i,string jahat)
 string Map::showmap()
 {
     string s="";
+    s+="    0  1  2  3  4  5  6  7  8  9  10\n";
+    s+="   ---------------------------------\n";
     for(int i=0;i<size;i++)
     {
+        if(i<10)
+        {
+            char tt=i+48;
+            s+=tt;
+            s+="  |";
+        }
+        else{s+="10 |";}
         for(int j=0;j<size;j++)
         {
             char t=m[i][j]+48;

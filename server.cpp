@@ -170,7 +170,7 @@ int main()
    
     svr.Get("/done", [](const Request &req, Response &res) {
         turn(1,pl(0));
-        res.set_content("next round", "text/plain");
+        res.set_content("next player", "text/plain");
     });
 
     svr.Get("/i", [](const Request &req, Response &res) {

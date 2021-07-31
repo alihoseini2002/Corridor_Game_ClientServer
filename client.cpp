@@ -8,7 +8,7 @@ int main()
 {
     char nobat,t,winner;
     bool flag=true;//recognize when game start
-    int choose;
+    int choose,ff=1;
     Client cli("localhost",8080);
     auto aaval=cli.Get("/ghablaval");
     string aval=aaval->body;
@@ -27,16 +27,23 @@ int main()
         for(int i=0;i<pl;i++){cli.Get("/-j");}
     }
     auto res=cli.Get("/start");
+    bool win=true;
     string b=res->body;
     cout<<b<<endl;
+    if(b.substr(0,5)=="sorry")
+    {
+        flag=false;
+        win=false;
+        ff=0;
+    }
+    
     while(flag)
     {
         auto wait=cli.Get("/wait");
         string w=wait->body;
         if(w.substr(0,3)=="The"){flag=false;nobat=w[(w.length())-1];}
     }
-    cout<<"you are player "<<nobat<<endl;
-    bool win=true;
+    if(ff!=0){cout<<"you are player "<<nobat<<endl;}
     while(win)
     {
         auto turn=cli.Get("/turn");
@@ -46,7 +53,7 @@ int main()
         {  
             auto mahal=cli.Get("/1");
             cout<<mahal->body<<endl;
-            cout<<"what do you want to do?( just enter the number)\n";
+            cout<<"what do you want to do? you can also see the map( just enter the number)\n";
             cout<<"1-move\n2-place wall\n3-show map\n:";
             cin>>choose;
             if(choose==1)
@@ -111,20 +118,20 @@ int main()
             {
                 int i,j;
                 string jahat,cc="";
-                cout<<"where do you want place the wall?\nenter radif to placewall or -1 to return to menu:";
+                cout<<"where do you want place the wall?\nenter row to placewall or -1 to return to menu:";
                 cin>>i;
                 if(i==-1){continue;}
                 while((i<0) || (i>10))
                 {
-                    cout<<"enter radif should be equal or greater than 0 and smaller than 11. try again\nradif:";
+                    cout<<"enter row should be equal or greater than 0 and smaller than 11. try again\nrow:";
                     cin>>i;
                 }
-                cout<<"enter soton to placewall or -1 to return to menu:";
+                cout<<"enter column to placewall or -1 to return to menu:";
                 cin>>j;
                 if(j==-1){continue;}
                 while((j<0) || (j>10))
                 {
-                    cout<<"enter soton should be equal or greater than 0 and smaller than 11. try again\nsoton:";
+                    cout<<"enter column should be equal or greater than 0 and smaller than 11. try again\ncolumn:";
                     cin>>j;
                 }
                 cout<<"Horizontal(H) or Vertical(V) to place wall or Sorry(S) to return to menu:";
