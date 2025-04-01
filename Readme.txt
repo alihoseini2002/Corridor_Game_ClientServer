@@ -1,3 +1,10 @@
-Quoridor Game - Second Semester Project
+Quoridor Game
+📌 About the Project
+This project is my second-semester bachelor's assignment for the Programming course. It is an implementation of the Quoridor game using a client-server architecture, developed in C++.
 
-This project is my second-semester bachelor's assignment for the Programming course. It is an implementation of the Quoridor game based on a client-server architecture, developed in C++. The project utilizes the httplib.h library.
+🛠️ Technologies Used
+Programming Language: C++
+
+Architecture: Client-Server
+
+Library: httplib.h
