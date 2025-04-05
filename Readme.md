@@ -19,7 +19,7 @@ The project demonstrates basic concepts of network communication and game logic.
 - Basic game logic of the Quoridor board game  
 - Client-server communication using HTTP  
 - Modular code structure for easier understanding  
-- Simple and clean implementation for educational purposes
+- Simple and clean implementation for educational purposes, with comments in the code to help better understanding
 
 ---
 
