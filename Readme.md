@@ -61,6 +61,7 @@ main: server.cpp client.cpp
 Computer Science Student  
 University of Tehran – Computer Science Department  
 
-**Email:** [alihoseini2002@gmail.com]
+**Email:** alihoseini2002@gmail.com  
 **Project Term:** Second Semester  
 **Course:** Programming
+
